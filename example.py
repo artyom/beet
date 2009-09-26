@@ -25,7 +25,7 @@
 u'paul'
 >>> u2.user
 u'john'
->>> User._getinstance(u2.user)
+>>> User.get(u2.user)
 <User:john>
 >>> Post.all()
 [<Post:uh-oh>, <Post:hello>]
@@ -34,7 +34,7 @@ set([])
 >>> u1.posts = [p1.identifier, p2.identifier]
 >>> u1.posts
 set([u'uh-oh', u'hello'])
->>> [Post._getinstance(p) for p in User._getinstance(u2.user).posts]
+>>> [Post.get(p) for p in User.get(u2.user).posts]
 [<Post:uh-oh>, <Post:hello>]
 """
 

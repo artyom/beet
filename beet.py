@@ -18,7 +18,7 @@ class GenericBeetObject(object):
     identifier = None
 
     @classmethod
-    def _getinstance(cls, identifier):
+    def get(cls, identifier):
         res = cls._redis.get('%s:%s' % (cls._metatype, identifier))
         if not res: return None
         pairs = simplejson.loads(res)
@@ -29,7 +29,7 @@ class GenericBeetObject(object):
     def all(cls):
         # TODO: make this return an iterator
         #return cls._redis.smembers('Objects:%s' % cls._metatype)
-        return [cls._getinstance(i) for i in cls._redis.smembers('Objects:%s' % cls._metatype)]
+        return [cls.get(i) for i in cls._redis.smembers('Objects:%s' % cls._metatype)]
 #
 # NOTE: code below could be slightly faster since it uses one mget command
 # instead of many subsequent gets
